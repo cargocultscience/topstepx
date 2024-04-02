@@ -62,7 +62,7 @@ function buttonClickReversePosition()
 
 function buttonClickCancelOrders()
 {
-    console.log('Reverse Position hotkey pressed');
+    console.log('Cancel Orders hotkey pressed');
     buttonClickCommon('cancel orders');
 }
 
