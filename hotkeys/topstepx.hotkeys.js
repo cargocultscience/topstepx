@@ -13,24 +13,39 @@ function setQuantityCommon(quantity)
     quantity_input.dispatchEvent(new Event('change', {bubbles: true}));
 }
 
-function buttonClickBuySellCommon(buttonTextToSearch, quantity)
+
+function buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity)
 {
     setQuantity(quantity);
     buttonClickCommon(buttonTextToSearch);
 }
 
-function buttonClickMarketQuantity(buySell, quantity)
+function buttonClickBuySellMarketQuantity(buySell, quantity)
 {
     var buttonTextToSearch = buySell ? 'buy' : 'sell';
-    console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');
-    buttonClickBuySellCommon(buttonTextToSearch, quantity);
+    console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');  
+    buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity);
 }
 
-function buttonClickJoinQuantity(buySell, quantity)
+function buttonClickBuySellJoinQuantity(buySell, quantity)
 {
     var buttonTextToSearch = buySell ? 'join bid' : 'join ask';
     console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');
-    buttonClickBuySellCommon(buttonTextToSearch, quantity);
+    buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity);
+}
+
+function buttonClickBuySellMarket(buySell)
+{
+    var buttonTextToSearch = buySell ? 'buy' : 'sell';
+    console.log(buttonTextToSearch + ' hotkey pressed');
+    buttonClickCommon(buttonTextToSearch);
+}
+
+function buttonClickBuySellJoin(buySell)
+{
+    var buttonTextToSearch = buySell ? 'join bid' : 'join ask';
+    console.log(buttonTextToSearch + ' hotkey pressed');
+    buttonClickCommon(buttonTextToSearch);
 }
 
 function buttonClickClosePosition()
