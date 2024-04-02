@@ -1,6 +1,5 @@
-function buttonClickMarketQuantity(buySell, quantity)
+function buttonClickBuySellCommon(buttonTextToSearch, quantity)
 {
-    var buttonTextToSearch = buySell ? 'buy' : 'sell';
     console.log(buttonTextToSearch + ' Quantity ' + quantity + ' Hotkey pressed');
     var quantity_input = document.querySelector('div[class^=ordercard_order] input[type=number]')
     if(quantity_input == null) { console.log('Unable to locate Quantity Edit Box'); return; }
@@ -10,4 +9,16 @@ function buttonClickMarketQuantity(buySell, quantity)
     var button = [...document.querySelector('#orderCardTab').querySelectorAll('button')].filter(button => button.innerHTML.toLowerCase().startsWith(buttonTextToSearch))[0];
     if(button == null) { console.log('Unable to locate button with text: ' + buttonTextToSearch); return; }
     button.click();
+
+}
+function buttonClickMarketQuantity(buySell, quantity)
+{
+    var buttonTextToSearch = buySell ? 'buy' : 'sell';
+    buttonClickBuySellCommon(buttonTextToSearch, quantity);
+}
+
+function buttonClickJoinQuantity(buySell, quantity)
+{
+    var buttonTextToSearch = buySell ? 'join bid' : 'join ask';
+    buttonClickBuySellCommon(buttonTextToSearch, quantity);
 }
