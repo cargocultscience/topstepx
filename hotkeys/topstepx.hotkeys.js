@@ -15,7 +15,6 @@ function setQuantityCommon(quantity)
 
 function buttonClickBuySellCommon(buttonTextToSearch, quantity)
 {
-    console.log(buttonTextToSearch + ' Quantity ' + quantity + ' Hotkey pressed');
     setQuantity(quantity);
     buttonClickCommon(buttonTextToSearch);
 }
@@ -23,37 +22,43 @@ function buttonClickBuySellCommon(buttonTextToSearch, quantity)
 function buttonClickMarketQuantity(buySell, quantity)
 {
     var buttonTextToSearch = buySell ? 'buy' : 'sell';
+    console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');
     buttonClickBuySellCommon(buttonTextToSearch, quantity);
 }
 
 function buttonClickJoinQuantity(buySell, quantity)
 {
     var buttonTextToSearch = buySell ? 'join bid' : 'join ask';
+    console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');
     buttonClickBuySellCommon(buttonTextToSearch, quantity);
 }
 
 function buttonClickClosePosition()
 {
+    console.log('Close Position hotkey pressed');
     buttonClickCommon('close position');
 }
 
 function buttonClickReversePosition()
 {
+    console.log('Reverse Position hotkey pressed');
     buttonClickCommon('reverse position');
 }
 
 function buttonClickFlattenAll()
 {
+    console.log('Flatten All hotkey pressed');
     buttonClickCommon('flatten all');
 }
 
 function buttonClickCancelAll()
 {
+    console.log('Cancel All hotkey pressed');
     buttonClickCommon('cancel all');
 }
 
 function setQuantity(quantity)
 {
+    console.log('Set Quantity ' + quantity + ' hotkey pressed');
     setQuantityCommon(quantity);
 }
-
