@@ -60,6 +60,12 @@ function buttonClickReversePosition()
     buttonClickCommon('reverse position');
 }
 
+function buttonClickCancelOrders()
+{
+    console.log('Reverse Position hotkey pressed');
+    buttonClickCommon('cancel orders');
+}
+
 function buttonClickFlattenAll()
 {
     console.log('Flatten All hotkey pressed');
