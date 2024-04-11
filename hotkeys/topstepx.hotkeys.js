@@ -1,3 +1,7 @@
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function buttonClickCommon(buttonTextToSearch)
 {
     var button = [...document.querySelector('#orderCardTab').querySelectorAll('button')].filter(button => button.innerHTML.toLowerCase().startsWith(buttonTextToSearch))[0];
@@ -82,4 +86,25 @@ function setQuantity(quantity)
 {
     console.log('Set Quantity ' + quantity + ' hotkey pressed');
     setQuantityCommon(quantity);
+}
+
+async function setContract(contractStartsWith)
+{
+    var input_div = [...document.querySelectorAll('div[class^=MuiInputBase-root')].filter(d => d.innerText.toLowerCase().startsWith('contract'))[0]
+    if(input_div == null)
+    {
+        console.log('unable to find input div for contract section');
+        return;
+    }
+
+    input_div.dispatchEvent(new Event('click', { bubbles : true }));
+    await sleep(100);
+    var list_item = [...document.querySelectorAll('li')].filter(d => d.innerText.toLowerCase().startsWith(contract.toLowerCase()))[0]
+    if(list_item == null)
+    {
+        console.log('unable to find li element for contract ' + contract);
+        return;
+    }
+    list_item.dispatchEvent(new Event('click', {bubbles: true}));
+    input_div.dispatchEvent(new Event('click', { bubbles : true }));
 }
