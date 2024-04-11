@@ -88,7 +88,7 @@ function setQuantity(quantity)
     setQuantityCommon(quantity);
 }
 
-async function setContract(contractStartsWith)
+async function setContract(contract)
 {
     var input_div = [...document.querySelectorAll('div[class^=MuiInputBase-root')].filter(d => d.innerText.toLowerCase().startsWith('contract'))[0]
     if(input_div == null)
@@ -103,8 +103,10 @@ async function setContract(contractStartsWith)
     if(list_item == null)
     {
         console.log('unable to find li element for contract ' + contract);
-        return;
     }
-    list_item.dispatchEvent(new Event('click', {bubbles: true}));
+    else
+    {
+        list_item.dispatchEvent(new Event('click', {bubbles: true}));
+    }
     input_div.dispatchEvent(new Event('click', { bubbles : true }));
 }
