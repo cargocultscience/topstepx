@@ -106,7 +106,28 @@ async function setContract(contract, delayMilliseconds)
     }
     else
     {
-        list_item.dispatchEvent(new Event('click', {bubbles: true}));
+        list_item.dispatchEvent(new Event('click', { bubbles: true }));
     }
     input_div.dispatchEvent(new Event('click', { bubbles : true }));
+}
+
+async function setAccount(account)
+{
+	var input_div = document.querySelector('div[class^=ordercard_account]').querySelector('div[role=combobox]')
+    if(input_div == null)
+    {
+        console.log('unable to find input div for contract section');
+        return;
+    }
+	input_div.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowUp', bubbles: true}));
+    await sleep(10);
+	var account_li = [...document.querySelectorAll('li')].filter(d => d.innerText.toLowerCase().includes(account.toLowerCase()))[0]
+    if(account_li == null)
+    {
+        console.log('unable to find li element for account ' + account);
+    }
+    else
+    {
+        account_li.dispatchEvent(new Event('click', { bubbles: true }));
+    }
 }
