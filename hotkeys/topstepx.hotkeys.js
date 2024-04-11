@@ -88,7 +88,7 @@ function setQuantity(quantity)
     setQuantityCommon(quantity);
 }
 
-async function setContract(contract)
+async function setContract(contract, delayMilliseconds)
 {
     var input_div = [...document.querySelectorAll('div[class^=MuiInputBase-root')].filter(d => d.innerText.toLowerCase().startsWith('contract'))[0]
     if(input_div == null)
@@ -98,7 +98,7 @@ async function setContract(contract)
     }
 
     input_div.dispatchEvent(new Event('click', { bubbles : true }));
-    await sleep(100);
+    await sleep(delayMilliseconds);
     var list_item = [...document.querySelectorAll('li')].filter(d => d.innerText.toLowerCase().startsWith(contract.toLowerCase()))[0]
     if(list_item == null)
     {
