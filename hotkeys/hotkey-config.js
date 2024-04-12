@@ -1,0 +1,1 @@
+hotkey_accounts = ['practice', '12345', 'anything'];
