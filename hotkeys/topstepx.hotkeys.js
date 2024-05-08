@@ -4,7 +4,7 @@ function sleep(ms) {
 
 function buttonClickCommon(buttonTextToSearch)
 {
-    var button = [...document.querySelector('#orderCardTab').querySelectorAll('button')].filter(button => button.innerHTML.toLowerCase().startsWith(buttonTextToSearch))[0];
+    var button = [...document.querySelector('[id^=orderCardTab]').querySelectorAll('button')].filter(button => button.innerHTML.toLowerCase().startsWith(buttonTextToSearch))[0];
     if(button == null) { console.log('Unable to locate button with text: ' + buttonTextToSearch); return; }
     button.click();
 }
