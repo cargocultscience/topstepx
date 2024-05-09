@@ -2,14 +2,14 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function buttonClickCommon(buttonTextToSearch)
+export function buttonClickCommon(buttonTextToSearch)
 {
     var button = [...document.querySelector('[id^=orderCardTab]').querySelectorAll('button')].filter(button => button.innerHTML.toLowerCase().startsWith(buttonTextToSearch))[0];
     if(button == null) { console.log('Unable to locate button with text: ' + buttonTextToSearch); return; }
     button.click();
 }
 
-function setQuantityCommon(quantity)
+export function setQuantityCommon(quantity)
 {
     var quantity_input = document.querySelector('div[class^=ordercard_order] input[type=number]')
     if(quantity_input == null) { console.log('Unable to locate Quantity Edit Box'); return; }
@@ -18,77 +18,77 @@ function setQuantityCommon(quantity)
 }
 
 
-function buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity)
+export function buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity)
 {
     setQuantity(quantity);
     buttonClickCommon(buttonTextToSearch);
 }
 
-function buttonClickBuySellMarketQuantity(buySell, quantity)
+export function buttonClickBuySellMarketQuantity(buySell, quantity)
 {
     var buttonTextToSearch = buySell ? 'buy' : 'sell';
     console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');  
     buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity);
 }
 
-function buttonClickBuySellJoinQuantity(buySell, quantity)
+export function buttonClickBuySellJoinQuantity(buySell, quantity)
 {
     var buttonTextToSearch = buySell ? 'join bid' : 'join ask';
     console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');
     buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity);
 }
 
-function buttonClickBuySellMarket(buySell)
+export function buttonClickBuySellMarket(buySell)
 {
     var buttonTextToSearch = buySell ? 'buy' : 'sell';
     console.log(buttonTextToSearch + ' hotkey pressed');
     buttonClickCommon(buttonTextToSearch);
 }
 
-function buttonClickBuySellJoin(buySell)
+export function buttonClickBuySellJoin(buySell)
 {
     var buttonTextToSearch = buySell ? 'join bid' : 'join ask';
     console.log(buttonTextToSearch + ' hotkey pressed');
     buttonClickCommon(buttonTextToSearch);
 }
 
-function buttonClickClosePosition()
+export function buttonClickClosePosition()
 {
     console.log('Close Position hotkey pressed');
     buttonClickCommon('close position');
 }
 
-function buttonClickReversePosition()
+export function buttonClickReversePosition()
 {
     console.log('Reverse Position hotkey pressed');
     buttonClickCommon('reverse position');
 }
 
-function buttonClickCancelOrders()
+export function buttonClickCancelOrders()
 {
     console.log('Cancel Orders hotkey pressed');
     buttonClickCommon('cancel orders');
 }
 
-function buttonClickFlattenAll()
+export function buttonClickFlattenAll()
 {
     console.log('Flatten All hotkey pressed');
     buttonClickCommon('flatten all');
 }
 
-function buttonClickCancelAll()
+export function buttonClickCancelAll()
 {
     console.log('Cancel All hotkey pressed');
     buttonClickCommon('cancel all');
 }
 
-function setQuantity(quantity)
+export function setQuantity(quantity)
 {
     console.log('Set Quantity ' + quantity + ' hotkey pressed');
     setQuantityCommon(quantity);
 }
 
-async function setContract(contract, delayMilliseconds)
+export async function setContract(contract, delayMilliseconds)
 {
     var input_div = [...document.querySelectorAll('div[class^=MuiInputBase-root')].filter(d => d.innerText.toLowerCase().startsWith('contract'))[0]
     if(input_div == null)
@@ -111,7 +111,7 @@ async function setContract(contract, delayMilliseconds)
     input_div.dispatchEvent(new Event('click', { bubbles : true }));
 }
 
-async function setAccount(account)
+export async function setAccount(account)
 {
 	var input_div = document.querySelector('div[class^=ordercard_account]').querySelector('div[role=combobox]')
     if(input_div == null)
