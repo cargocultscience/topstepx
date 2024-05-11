@@ -82,6 +82,12 @@ function buttonClickCancelAll()
     buttonClickCommon('cancel all');
 }
 
+function buttonClickStopBreakEven()
+{
+    console.log('Stop Break Even hotkey pressed');
+    buttonClickCommon('b/e');
+}
+
 function setQuantity(quantity)
 {
     console.log('Set Quantity ' + quantity + ' hotkey pressed');
