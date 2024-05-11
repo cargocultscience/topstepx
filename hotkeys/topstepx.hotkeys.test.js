@@ -1,5 +1,5 @@
 console.log('hello external world');
 
-function test() {
+export function test() {
   console.log("hello");
 }
