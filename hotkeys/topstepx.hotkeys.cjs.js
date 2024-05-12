@@ -124,7 +124,7 @@ async function setupHotkeys(accounts, override_url) {
         
     document.addEventListener('keydown',handleKeyDown);
     function handleKeyDown(event) {
-        if(event.repeat == true) return;
+        //if(event.repeat == true) return;
         let eventKeySet = new Set();
         if(event.shiftKey)
         {
