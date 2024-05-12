@@ -227,8 +227,9 @@ async function setContract(contract, delayMilliseconds)
     input_div.dispatchEvent(new Event('click', { bubbles : true }));
 }
 
-async function setAccount(account)
+async function setAccount(account, delayMilliseconds = 10)
 {
+    await sleep(delayMilliseconds);
 	var input_div = document.querySelector('div[class^=ordercard_account]').querySelector('div[role=combobox]')
     if(input_div == null)
     {
