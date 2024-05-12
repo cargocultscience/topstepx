@@ -172,6 +172,7 @@ function setQuantityCommon(quantity)
     if(quantity_input == null) { console.log('Unable to locate Quantity Edit Box'); return; }
     quantity_input.value = quantity;
     quantity_input.dispatchEvent(new Event('change', {bubbles: true}));
+    quantity_input.dispatchEvent(new Event('click', {bubbles: true}));
 }
 
 
