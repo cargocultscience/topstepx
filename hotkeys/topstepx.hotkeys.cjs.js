@@ -1,4 +1,4 @@
-function setupHotkeys(accounts) {
+async function setupHotkeys(accounts, override_url) {
     var hotkeys = [
         {"keys" : ["alt", "ctrl", "keyb"], "f" : () => buttonClickBuySellMarket(true)},
         {"keys" : ["alt", "ctrl", "keys"], "f" : () => buttonClickBuySellMarket(false)},
@@ -71,8 +71,15 @@ function setupHotkeys(accounts) {
     ];
 
     var hotkeysDict = {}
+    if(override_url) {
+        console.log("attempting to override hotkey definitions from " + override_url);
+        const response = await fetch(override_url);
+        const override_js = await response.text();
+        eval(override_js);
+    }
+    console.log(hotkeys);
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
-
+        
     document.addEventListener('keydown',handleKeyDown);
     function handleKeyDown(event) {
         let eventKeySet = new Set();
