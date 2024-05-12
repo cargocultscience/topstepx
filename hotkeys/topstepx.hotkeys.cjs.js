@@ -124,6 +124,7 @@ async function setupHotkeys(accounts, override_url) {
         
     document.addEventListener('keydown',handleKeyDown);
     function handleKeyDown(event) {
+        if(event.repeat == false) return;
         let eventKeySet = new Set();
         if(event.shiftKey)
         {
@@ -136,6 +137,10 @@ async function setupHotkeys(accounts, override_url) {
         if(event.ctrlKey)
         {
             eventKeySet.add("ctrl");
+        }
+        if(event.metaKey)
+        {
+            eventKeySet.add("meta");
         }
         eventKeySet.add(event.code.toLowerCase());
         eventKey = Array.from(eventKeySet).sort().join();
