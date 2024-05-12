@@ -1,4 +1,75 @@
-function registerHotkeys(hotkeys) {
+function setup(accounts) {
+    var hotkeys = [
+        {"keys" : ["alt", "ctrl", "keyb"], "f" : () => buttonClickBuySellMarket(true)},
+        {"keys" : ["alt", "ctrl", "keys"], "f" : () => buttonClickBuySellMarket(false)},
+        {"keys" : ["shift", "alt", "ctrl", "keyb"], "f" : () => buttonClickBuySellJoin(true)},
+        {"keys" : ["shift", "alt", "ctrl", "keyb"], "f" : () => buttonClickBuySellJoin(false)},
+        {"keys" : ["alt", "ctrl", "keyc"], "f" : () => buttonClickClosePosition()},
+        {"keys" : ["alt", "ctrl", "keyr"], "f" : () => buttonClickReversePosition()},
+        {"keys" : ["shift", "alt", "ctrl", "keyc"], "f" : () => buttonClickCancelOrders()},
+        {"keys" : ["alt", "ctrl", "keyf"], "f" : () => buttonClickFlattenAll()},
+        {"keys" : ["alt", "ctrl", "keyx"], "f" : () => buttonClickCancelAll()},
+        
+        {"keys" : ["alt", "ctrl", "digit1"], "f" : () => buttonClickBuySellMarketQuantity(true, '1')},
+        {"keys" : ["alt", "ctrl", "digit2"], "f" : () => buttonClickBuySellMarketQuantity(true, '2')},
+        {"keys" : ["alt", "ctrl", "digit3"], "f" : () => buttonClickBuySellMarketQuantity(true, '3')},
+        {"keys" : ["alt", "ctrl", "digit4"], "f" : () => buttonClickBuySellMarketQuantity(true, '4')},
+        {"keys" : ["alt", "ctrl", "digit5"], "f" : () => buttonClickBuySellMarketQuantity(true, '5')},
+        {"keys" : ["alt", "ctrl", "digit9"], "f" : () => buttonClickBuySellMarketQuantity(true, '10')},
+        {"keys" : ["alt", "ctrl", "digit0"], "f" : () => buttonClickBuySellMarketQuantity(true, '15')},
+        {"keys" : ["alt", "ctrl", "f1"], "f" : () => buttonClickBuySellMarketQuantity(false, '1')},
+        {"keys" : ["alt", "ctrl", "f2"], "f" : () => buttonClickBuySellMarketQuantity(false, '2')},
+        {"keys" : ["alt", "ctrl", "f3"], "f" : () => buttonClickBuySellMarketQuantity(false, '3')},
+        {"keys" : ["alt", "ctrl", "f4"], "f" : () => buttonClickBuySellMarketQuantity(false, '4')},
+        {"keys" : ["alt", "ctrl", "f5"], "f" : () => buttonClickBuySellMarketQuantity(false, '5')},
+        {"keys" : ["alt", "ctrl", "f9"], "f" : () => buttonClickBuySellMarketQuantity(false, '10')},
+        {"keys" : ["alt", "ctrl", "f10"], "f" : () => buttonClickBuySellMarketQuantity(false, '15')},
+
+        {"keys" : ["alt", "digit1"], "f" : () => buttonClickBuySellJoinQuantity(true, '1')},
+        {"keys" : ["alt", "digit2"], "f" : () => buttonClickBuySellJoinQuantity(true, '2')},
+        {"keys" : ["alt", "digit3"], "f" : () => buttonClickBuySellJoinQuantity(true, '3')},
+        {"keys" : ["alt", "digit4"], "f" : () => buttonClickBuySellJoinQuantity(true, '4')},
+        {"keys" : ["alt", "digit5"], "f" : () => buttonClickBuySellJoinQuantity(true, '5')},
+        {"keys" : ["alt", "digit9"], "f" : () => buttonClickBuySellJoinQuantity(true, '10')},
+        {"keys" : ["alt", "digit10"], "f" : () => buttonClickBuySellJoinQuantity(true, '15')},
+        {"keys" : ["alt", "f1"], "f" : () => buttonClickBuySellJoinQuantity(false, '1')},
+        {"keys" : ["alt", "f2"], "f" : () => buttonClickBuySellJoinQuantity(false, '2')},
+        {"keys" : ["alt", "f3"], "f" : () => buttonClickBuySellJoinQuantity(false, '3')},
+        {"keys" : ["alt", "f4"], "f" : () => buttonClickBuySellJoinQuantity(false, '4')},
+        {"keys" : ["alt", "f5"], "f" : () => buttonClickBuySellJoinQuantity(false, '5')},
+        {"keys" : ["alt", "f9"], "f" : () => buttonClickBuySellJoinQuantity(false, '10')},
+        {"keys" : ["alt", "f10"], "f" : () => buttonClickBuySellJoinQuantity(false, '15')},
+
+        {"keys" : ["alt", "ctrl", "numpad1"], "f" : () => setContract('nq', 10)},
+        {"keys" : ["alt", "ctrl", "numpad2"], "f" : () => setContract('es', 10)},
+        {"keys" : ["alt", "ctrl", "numpad3"], "f" : () => setContract('gc', 10)},
+        {"keys" : ["alt", "ctrl", "numpad4"], "f" : () => setContract('cl', 10)},
+        {"keys" : ["alt", "ctrl", "numpad5"], "f" : () => setContract('nkd', 10)},
+        {"keys" : ["alt", "ctrl", "numpad6"], "f" : () => setContract('ym', 10)},
+        {"keys" : ["alt", "ctrl", "numpad7"], "f" : () => setContract('si', 10)},
+        {"keys" : ["alt", "ctrl", "numpad8"], "f" : () => setContract('mnq', 10)},
+        {"keys" : ["alt", "ctrl", "numpad9"], "f" : () => setContract('mes', 10)},
+        
+        {"keys" : ["shift", "alt", "ctrl", "digit1"], "f" : () => setQuantity(1)},
+        {"keys" : ["shift", "alt", "ctrl", "digit2"], "f" : () => setQuantity(2)},
+        {"keys" : ["shift", "alt", "ctrl", "digit3"], "f" : () => setQuantity(3)},
+        {"keys" : ["shift", "alt", "ctrl", "digit4"], "f" : () => setQuantity(4)},
+        {"keys" : ["shift", "alt", "ctrl", "digit5"], "f" : () => setQuantity(5)},
+        {"keys" : ["shift", "alt", "ctrl", "digit9"], "f" : () => setQuantity(10)},
+        {"keys" : ["shift", "alt", "ctrl", "digit0"], "f" : () => setQuantity(15)},
+        
+        {"keys" : ["ctrl", "numpad1"], "f" : () => setAccount(accounts[0])},
+        {"keys" : ["ctrl", "numpad2"], "f" : () => setAccount(accounts[1])},
+        {"keys" : ["ctrl", "numpad3"], "f" : () => setAccount(accounts[2])},
+        {"keys" : ["ctrl", "numpad4"], "f" : () => setAccount(accounts[3])},
+        {"keys" : ["ctrl", "numpad5"], "f" : () => setAccount(accounts[4])},
+        {"keys" : ["ctrl", "numpad6"], "f" : () => setAccount(accounts[5])},
+        {"keys" : ["ctrl", "numpad7"], "f" : () => setAccount(accounts[6])},
+        {"keys" : ["ctrl", "numpad8"], "f" : () => setAccount(accounts[7])},
+        {"keys" : ["ctrl", "numpad9"], "f" : () => setAccount(accounts[8])},
+        {"keys" : ["alt", "ctrl", "keye"], "f" : () => buttonClickStopBreakEven()},
+    ];
+
     var hotkeysDict = {}
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
 
@@ -19,8 +90,7 @@ function registerHotkeys(hotkeys) {
         }
         eventKeySet.add(event.code.toLowerCase());
         eventKey = Array.from(eventKeySet).sort().join();
-        
-        console.log(event, eventKeySet, eventKey);
+       
         if(eventKey in hotkeysDict)
         {
             console.log("Firing hotkey: " + eventKey)
