@@ -75,6 +75,7 @@ function setupHotkeys(accounts) {
 
     document.addEventListener('keydown',handleKeyDown);
     function handleKeyDown(event) {
+        event.preventDefault();
         let eventKeySet = new Set();
         if(event.shiftKey)
         {
