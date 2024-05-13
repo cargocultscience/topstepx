@@ -1,4 +1,4 @@
-function version()
+function hotkeysVersion()
 {
     return "3.0.1";
 }
