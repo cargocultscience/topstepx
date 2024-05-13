@@ -1,4 +1,8 @@
-let hotkeys_version = "3.0.1";
+function version()
+{
+    return "3.0.1";
+}
+
 
 async function setupHotkeys(accounts, override_url) {
     var hotkeys = [
