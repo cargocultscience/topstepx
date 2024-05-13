@@ -171,8 +171,7 @@ function setQuantityCommon(quantity)
     var quantity_input = document.querySelector('div[class^=ordercard_order] input[type=number]')
     if(quantity_input == null) { console.log('Unable to locate Quantity Edit Box'); return; }
     quantity_input.value = quantity;
-    quantity_input.dispatchEvent(new Event('change', {bubbles: true}));
-    quantity_input.dispatchEvent(new Event('click', {bubbles: true}));
+    quantity_input[Object.keys(quantity_input).filter((k) => k.startsWith('__reactProps'))[0]].onChange({'target' : { 'value' : quantity}});
 }
 
 
