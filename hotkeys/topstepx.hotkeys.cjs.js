@@ -1,3 +1,5 @@
+let hotkeys_version = "3.0.1";
+
 async function setupHotkeys(accounts, override_url) {
     var hotkeys = [
         // market buy
@@ -175,9 +177,10 @@ function setQuantityCommon(quantity)
 }
 
 
-function buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity)
+async function buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity)
 {
     setQuantity(quantity);
+    await sleep(10);
     buttonClickCommon(buttonTextToSearch);
 }
 
