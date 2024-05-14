@@ -1,6 +1,6 @@
 function hotkeysVersion()
 {
-    return "3.0.1";
+    return "4.0.1";
 }
 
 async function setupHotkeys(accounts) {
