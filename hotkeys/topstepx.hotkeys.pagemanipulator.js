@@ -180,4 +180,5 @@ async function setAccount(account, delayMilliseconds = 25)
     {
         account_li.dispatchEvent(new Event('click', { bubbles: true }));
     }
+    input_div.dispatchEvent(new Event('click', { bubbles : true }));
 }
