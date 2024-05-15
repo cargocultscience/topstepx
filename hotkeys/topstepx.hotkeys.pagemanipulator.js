@@ -1,6 +1,25 @@
 function hotkeysVersion()
 {
-    return "4.2.4";
+    return "4.2.5";
+}
+
+var debugHotkeys = false;
+
+async function connectChart() {
+    // chart component may not be available on the moment the page is loaded so try in a loop
+    for(var i = 0; i < 10; ++i) {    
+        console.log("Trying to find chart object");
+        chartArray = Object.keys(document).filter(k => k.startsWith('tradingview'));
+        if(chartArray.length > 0) {
+            chartName = chartArray[0];
+            chart = document[chartName];
+            console.log("Found chart: " + chartName);
+            return chart;
+        }
+        await sleep(250);
+    }
+    console.log("Failed to connect chart");
+    return null;
 }
 
 async function setupHotkeys(accounts, hotkeys) {
@@ -8,32 +27,18 @@ async function setupHotkeys(accounts, hotkeys) {
     console.log(hotkeys);
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
         
-    document.addEventListener('keydown',handleKeyDownDocument);
-    chartConnected = false;
-    while(!chartConnected) {
-        console.log("Trying to connect chart");
-        chartArray = Object.keys(document).filter(k => k.startsWith('tradingview'));
-        if(chartArray.length > 0) {
-            chartName = chartArray[0];
-            chart = document[chartName];
-            console.log("Connected chart: " + chartName);
-            chartConnected = true;
-            chart.addEventListener('keydown', handleKeyDownChart);
-        }
-        await sleep(250);
-    }
-
-    function handleKeyDownChart(event) {
-        console.log("handle keydown chart");
-        handleKeyDownCommon(event, "chart");
-    }
-
-    function handleKeyDownDocument(event) {
-        handleKeyDownCommon(event, "document");
-    }
+    document.addEventListener('keydown', (event) => handleKeyDown(event, 'document'));
+    var chart = findChart();
     
-    function handleKeyDownCommon(event, source) {
-        console.log(event, source);
+    if(chart) {
+        chart.addEventListener('keydown', (event) => handleKeyDown(event, 'chart'));
+    }
+
+    function handleKeyDown(event, source) {
+        if(debugHotkeys)
+        {
+            console.log("DEBUG: " + event);
+        }
         if(event.repeat == true) return;
         let eventKeySet = new Set();
         if(event.shiftKey)
@@ -64,6 +69,12 @@ async function setupHotkeys(accounts, hotkeys) {
     }
 }
 
+
+function toggleDebug()
+{
+    debugHotkeys = !debugHotkeys;
+    console.log("hotkey debugging set to " + debugHotkeys);
+}
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
