@@ -1,6 +1,6 @@
 function hotkeysVersion()
 {
-    return "4.2.6";
+    return "4.2.7";
 }
 
 var debugHotkeys = false;
@@ -28,18 +28,18 @@ async function setupHotkeys(accounts, hotkeys) {
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
         
     document.addEventListener('keydown', (event) => handleKeyDown(event, 'document'));
-    var chart = findChart();
     
+    var chart = await findChart();
     if(chart) {
         chart.addEventListener('keydown', (event) => handleKeyDown(event, 'chart'));
     }
 
     function handleKeyDown(event, source) {
+        if(event.repeat == true) return;
         if(debugHotkeys)
         {
-            console.log("DEBUG: " + event);
+            console.log(event, source);
         }
-        if(event.repeat == true) return;
         let eventKeySet = new Set();
         if(event.shiftKey)
         {
