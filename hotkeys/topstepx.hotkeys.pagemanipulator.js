@@ -1,6 +1,6 @@
 function hotkeysVersion()
 {
-    return "4.1.1";
+    return "4.1.2";
 }
 
 async function setupHotkeys(accounts) {
@@ -9,8 +9,8 @@ async function setupHotkeys(accounts) {
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
         
     document.addEventListener('keydown',handleKeyDownDocument);
-    document[Object.keys(document).filter(k => k.startsWith('tradingview'))[0]].addEventListener('keydown',handleKeyDownChart);
-    console.log(Object.keys(document).filter(k => k.startsWith('tradingview'))[0])
+    //document[Object.keys(document).filter(k => k.startsWith('tradingview'))[0]].addEventListener('keydown',handleKeyDownChart);
+    console.log(Object.keys(document).filter(k => k.startsWith('tradingview')));
     function handleKeyDownChart(event) {
         console.log("handle keydown chart");
         handleKeyDownCommon(event, "chart");
