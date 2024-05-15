@@ -1,13 +1,8 @@
 function hotkeysVersion()
 {
-    return "4.2.1";
+    return "4.2.2";
 }
 
-var chartConnected = false;
-
-async function tryChartListner()
-{
-}
 
 async function setupHotkeys(accounts) {
     var hotkeysDict = {}
@@ -15,6 +10,7 @@ async function setupHotkeys(accounts) {
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
         
     document.addEventListener('keydown',handleKeyDownDocument);
+    chartConnected = false;
     while(!chartConnected) {
         console.log("Trying to connect chart");
         chartArray = Object.keys(document).filter(k => k.startsWith('tradingview'));
@@ -24,7 +20,7 @@ async function setupHotkeys(accounts) {
             chartConnected = true;
             chart.addEventListener('keydown', handleKeyDownChart);
         }
-        sleep(250);
+        sleep(1000);
     }
 
     //document[Object.keys(document).filter(k => k.startsWith('tradingview'))[0]].addEventListener('keydown',handleKeyDownChart);
