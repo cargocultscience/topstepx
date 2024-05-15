@@ -16,7 +16,7 @@ async function setupHotkeys(accounts) {
         
     document.addEventListener('keydown',handleKeyDownDocument);
     while(!chartConnected) {
-        console.log("Trying to connect chart: " + chart);
+        console.log("Trying to connect chart");
         chartArray = Object.keys(document).filter(k => k.startsWith('tradingview'));
         if(chartArray.length > 0) {
             chart = chartArray[0];
