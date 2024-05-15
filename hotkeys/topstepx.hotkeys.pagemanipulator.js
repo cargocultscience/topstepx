@@ -1,6 +1,6 @@
 function hotkeysVersion()
 {
-    return "4.2.5";
+    return "4.2.6";
 }
 
 var debugHotkeys = false;
