@@ -4,10 +4,6 @@ function hotkeysVersion()
 }
 
 async function setupHotkeys(accounts) {
-    document.tradingview_0cbf3.addEventListener('keydown',handleKeyDown);
-    function handleKeyDown(event) { console.log(event) }
-
-
     var hotkeysDict = {}
     console.log(hotkeys);
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
