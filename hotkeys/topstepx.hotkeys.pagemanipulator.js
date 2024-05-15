@@ -10,8 +10,9 @@ async function setupHotkeys(accounts) {
         
     document.addEventListener('keydown',handleKeyDownDocument);
     document[Object.keys(document).filter(k => k.startsWith('tradingview'))[0]].addEventListener('keydown',handleKeyDownChart);
-    
+    console.log(Object.keys(document).filter(k => k.startsWith('tradingview'))[0])
     function handleKeyDownChart(event) {
+        console.log("handle keydown chart");
         handleKeyDownCommon(event, "chart");
     }
 
