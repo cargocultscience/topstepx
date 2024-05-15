@@ -22,7 +22,7 @@ async function findChart() {
     return null;
 }
 
-async function setupHotkeys(accounts, hotkeys) {
+async function setupHotkeys(accounts) {
     var hotkeysDict = {}
     console.log(hotkeys);
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
