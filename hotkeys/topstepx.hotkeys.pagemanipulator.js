@@ -4,12 +4,26 @@ function hotkeysVersion()
 }
 
 async function setupHotkeys(accounts) {
+    document.tradingview_0cbf3.addEventListener('keydown',handleKeyDown);
+    function handleKeyDown(event) { console.log(event) }
+
+
     var hotkeysDict = {}
     console.log(hotkeys);
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
         
-    document.addEventListener('keydown',handleKeyDown);
-    function handleKeyDown(event) {
+    document.addEventListener('keydown',handleKeyDownDocument);
+    document[Object.keys(document).filter(k => k.startsWith('tradingview'))[0]].addEventListener('keydown',handleKeyDownChart);
+    
+    function handleKeyDownChart(event) {
+        handleKeyDownCommon(event, "chart");
+    }
+
+    function handleKeyDownDocument(event) {
+        handleKeyDownCommon(event, "document");
+    }
+    
+    function handleKeyDownCommon(event, source) {
         if(event.repeat == true) return;
         let eventKeySet = new Set();
         if(event.shiftKey)
@@ -34,7 +48,7 @@ async function setupHotkeys(accounts) {
         if(eventKey in hotkeysDict)
         {
             event.preventDefault();
-            console.log("Firing hotkey: " + eventKey)
+            console.log("Firing hotkey: " + eventKey + " from " + source);
             hotkeysDict[eventKey]();
         }
     }
