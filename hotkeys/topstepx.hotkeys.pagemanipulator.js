@@ -5,7 +5,7 @@ function hotkeysVersion()
 
 var debugHotkeys = false;
 
-async function connectChart() {
+async function findChart() {
     // chart component may not be available on the moment the page is loaded so try in a loop
     for(var i = 0; i < 10; ++i) {    
         console.log("Trying to find chart object");
