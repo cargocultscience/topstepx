@@ -1,6 +1,6 @@
 function hotkeysVersion()
 {
-    return "4.1.2";
+    return "4.2.1";
 }
 
 var chartConnected = false;
