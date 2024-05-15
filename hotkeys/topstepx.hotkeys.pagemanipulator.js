@@ -1,6 +1,6 @@
 function hotkeysVersion()
 {
-    return "4.0.1";
+    return "4.1.1";
 }
 
 async function setupHotkeys(accounts) {
@@ -20,6 +20,7 @@ async function setupHotkeys(accounts) {
     }
     
     function handleKeyDownCommon(event, source) {
+        console.log(event, source);
         if(event.repeat == true) return;
         let eventKeySet = new Set();
         if(event.shiftKey)
