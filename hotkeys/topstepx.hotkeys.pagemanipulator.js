@@ -1,6 +1,25 @@
 function hotkeysVersion()
 {
-    return "4.0.1";
+    return "4.2.7";
+}
+
+var debugHotkeys = false;
+
+async function findChart() {
+    // chart component may not be available on the moment the page is loaded so try in a loop
+    for(var i = 0; i < 10; ++i) {    
+        console.log("Trying to find chart object");
+        chartArray = Object.keys(document).filter(k => k.startsWith('tradingview'));
+        if(chartArray.length > 0) {
+            chartName = chartArray[0];
+            chart = document[chartName];
+            console.log("Found chart: " + chartName);
+            return chart;
+        }
+        await sleep(250);
+    }
+    console.log("Failed to connect chart");
+    return null;
 }
 
 async function setupHotkeys(accounts) {
@@ -8,9 +27,19 @@ async function setupHotkeys(accounts) {
     console.log(hotkeys);
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
         
-    document.addEventListener('keydown',handleKeyDown);
-    function handleKeyDown(event) {
+    document.addEventListener('keydown', (event) => handleKeyDown(event, 'document'));
+    
+    var chart = await findChart();
+    if(chart) {
+        chart.addEventListener('keydown', (event) => handleKeyDown(event, 'chart'));
+    }
+
+    function handleKeyDown(event, source) {
         if(event.repeat == true) return;
+        if(debugHotkeys)
+        {
+            console.log(event, source);
+        }
         let eventKeySet = new Set();
         if(event.shiftKey)
         {
@@ -34,12 +63,18 @@ async function setupHotkeys(accounts) {
         if(eventKey in hotkeysDict)
         {
             event.preventDefault();
-            console.log("Firing hotkey: " + eventKey)
+            console.log("Firing hotkey: " + eventKey + " from " + source);
             hotkeysDict[eventKey]();
         }
     }
 }
 
+
+function toggleDebug()
+{
+    debugHotkeys = !debugHotkeys;
+    console.log("hotkey debugging set to " + debugHotkeys);
+}
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
