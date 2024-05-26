@@ -5,6 +5,69 @@ function hotkeysVersion()
 
 var debugHotkeys = false;
 
+async function createAddWidget(addNews, addCalendar)
+{
+    cardDiv = null;
+    for(i=0; i < 10 || cardDiv == null; ++i)
+    {
+        await sleep(250);
+        cardDiv = document.querySelector('div[class^=ordercard_order]');
+    }
+
+    if(cardDiv == null) 
+    {
+        console.error("Cannot find card div");
+        return;
+    }
+    console.log("found cardDiv for appending");
+    var r = Math.floor(Math.random() * (9999 - 0 + 1) + 0);
+    fetch("https://feed.financialjuice.com/widgets/widgets.js?r=" + r)
+        .then((fj_res) => fj_res.text())
+        .then((fj_js) => {
+            eval(fj_js);
+
+            cargoLink = document.createElement("a")
+            cargoLink.href = 'https://t.ly/1Uy49';
+            cargoLink.target = '_blank';
+            cargoDiv = document.createElement("div");
+            cargoDiv.innerHTML = "<img width=15 src='https://avatars.githubusercontent.com/u/28972498?s=96&v=4'> CargoCult Hotkeys " + hotkeysVersion();
+            cargoLink.appendChild(cargoDiv);
+            cardDiv.appendChild(cargoLink);
+
+            if(addNews)
+            {
+                newsDiv = document.createElement("div");
+                newsDiv.id = "financialjuice-news-widget-container";
+                cardDiv.appendChild(newsDiv);
+                var options = {};
+                options.container = "financialjuice-news-widget-container";
+                options.mode = "Dark";
+                options.width= "300px";
+                options.height= "300px";
+                options.backColor= "1e222d";
+                options.fontColor= "b2b5be";
+                options.widgetType= "NEWS";
+                new window.FJWidgets.createWidget(options);
+            }
+            
+            if(addCalendar)
+            {
+                calendarDiv = document.createElement("div");
+                calendarDiv.id = "financialjuice-eco-widget-container";
+                cardDiv.appendChild(calendarDiv);
+                var options = {};
+                options.container = "financialjuice-eco-widget-container";
+                options.mode = "standard";
+                options.width= "300px";
+                options.height= "600px";
+                options.backColor= "1e222d";
+                options.fontColor= "b2b5be";
+                options.widgetType= "ECOCAL";
+                new window.FJWidgets.createWidget(options);
+            }
+        });
+}
+
 async function findChart() {
     // chart component may not be available on the moment the page is loaded so try in a loop
     for(var i = 0; i < 10; ++i) {    
@@ -22,7 +85,7 @@ async function findChart() {
     return null;
 }
 
-async function setupHotkeys(accounts) {
+async function setupHotkeys(accounts, addNews=true, addCalendar=true) {
     var hotkeysDict = {}
     console.log(hotkeys);
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
@@ -33,6 +96,8 @@ async function setupHotkeys(accounts) {
     if(chart) {
         chart.addEventListener('keydown', (event) => handleKeyDown(event, 'chart'));
     }
+
+    createAddWidget(addNews, addCalendar);
 
     function handleKeyDown(event, source) {
         if(event.repeat == true) return;
