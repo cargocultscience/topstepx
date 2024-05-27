@@ -38,7 +38,7 @@ def parseContract(p):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("Script to record tilt to file")
     parser.add_argument("-o", "--output_directory", default="/data/trading/topstep/daily_levels/")
-    parser.add_argument('-f', '--filename', default="daily_levels.json")
+    parser.add_argument('-f', '--filename', default="daily_levels.csv")
     parser.add_argument('-v', '--verbose', action="store_true", default=False)
     args = parser.parse_args()
 
