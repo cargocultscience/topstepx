@@ -164,7 +164,7 @@ function centerDom()
 {
     var centerDomSVG = document.querySelectorAll('svg[aria-label^="Center on Last Price"')[0]
     if(centerDomSVG == null) { console.log('Unable to locate Center DOM on Last Price button'); return; }
-    quantity_input[Object.keys(quantity_input).filter((k) => k.startsWith('__reactProps'))[0]].onClick();
+    centerDomSVG[Object.keys(centerDomSVG).filter((k) => k.startsWith('__reactProps'))[0]].onClick();
 }
 
 async function buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity)
