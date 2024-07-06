@@ -117,6 +117,9 @@ fetch('https://raw.githubusercontent.com/cargocultscience/topstepx/main/hotkeys/
     // move stop to break even
     {"keys" : ["alt", "ctrl", "keye"], "f" : () => buttonClickStopBreakEven()},
   
+    // center dom
+    {"keys" : ["shift", "alt", "ctrl", "keyd"], "f" : () => centerDom()},
+
     // debug mode
     {"keys" : ["alt", "ctrl", "keyd"], "f" : () => toggleDebug()},
 ];
