@@ -4,7 +4,7 @@ fetch('https://raw.githubusercontent.com/cargocultscience/topstepx/main/hotkeys/
   eval(js);
   console.log("Hotkeys version: " + hotkeysVersion());
   accounts = ['practice', '84774', '84944', '84963'];
-  
+
   var hotkeys = [
     // market buy
     {"keys" : ["alt", "ctrl", "keyb"], "f" : () => buttonClickBuySellMarket(true)},
@@ -24,7 +24,7 @@ fetch('https://raw.githubusercontent.com/cargocultscience/topstepx/main/hotkeys/
     {"keys" : ["alt", "ctrl", "keyf"], "f" : () => buttonClickFlattenAll()},
     // cancel all
     {"keys" : ["alt", "ctrl", "keyx"], "f" : () => buttonClickCancelAll()},
-    
+
     // buy quantity 1 at market
     {"keys" : ["alt", "ctrl", "digit1"], "f" : () => buttonClickBuySellMarketQuantity(true, '1')},
     // buy quantity 2 at market
@@ -53,6 +53,10 @@ fetch('https://raw.githubusercontent.com/cargocultscience/topstepx/main/hotkeys/
     {"keys" : ["alt", "ctrl", "f9"], "f" : () => buttonClickBuySellMarketQuantity(false, '10')},
     // sell quantity 15 at market
     {"keys" : ["alt", "ctrl", "f10"], "f" : () => buttonClickBuySellMarketQuantity(false, '15')},
+    // increase quantity
+    {"keys" : ["alt", "ctrl", "keym"], "f" : () => buttonClickIncreaseQuantity()},
+    // decrease quantity
+    {"keys" : ["alt", "ctrl", "keyn"], "f" : () => buttonClickDecreaseQuantity()},
 
     // join bid with quantity 1
     {"keys" : ["alt", "digit1"], "f" : () => buttonClickBuySellJoinQuantity(true, '1')},
@@ -102,7 +106,7 @@ fetch('https://raw.githubusercontent.com/cargocultscience/topstepx/main/hotkeys/
     {"keys" : ["shift", "alt", "ctrl", "digit5"], "f" : () => setQuantity(5)},
     {"keys" : ["shift", "alt", "ctrl", "digit9"], "f" : () => setQuantity(10)},
     {"keys" : ["shift", "alt", "ctrl", "digit0"], "f" : () => setQuantity(15)},
-    
+
     // switch to account
     {"keys" : ["shift", "alt", "ctrl", "keyu"], "f" : () => setAccount(accounts[0])},
     {"keys" : ["shift", "alt", "ctrl", "keyi"], "f" : () => setAccount(accounts[1])},
@@ -116,7 +120,7 @@ fetch('https://raw.githubusercontent.com/cargocultscience/topstepx/main/hotkeys/
 
     // move stop to break even
     {"keys" : ["alt", "ctrl", "keye"], "f" : () => buttonClickStopBreakEven()},
-  
+
     // center dom
     {"keys" : ["shift", "alt", "ctrl", "keyd"], "f" : () => centerDom()},
 

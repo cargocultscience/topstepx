@@ -27,7 +27,7 @@ function buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity)
 function buttonClickBuySellMarketQuantity(buySell, quantity)
 {
     var buttonTextToSearch = buySell ? 'buy' : 'sell';
-    console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');  
+    console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');
     buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity);
 }
 
@@ -88,6 +88,17 @@ function buttonClickStopBreakEven()
     buttonClickCommon('b/e');
 }
 
+function buttonClickIncreaseQuantity()
+{
+    console.log("Increase quantity hotkey pressed");
+    buttonClickCommon('+');
+}
+function buttonClickDecreaseQuantity()
+{
+    console.log("Decrease quantity hotkey pressed");
+    buttonClickCommon('-');
+}
+
 function setQuantity(quantity)
 {
     console.log('Set Quantity ' + quantity + ' hotkey pressed');
@@ -137,3 +148,4 @@ async function setAccount(account)
         account_li.dispatchEvent(new Event('click', { bubbles: true }));
     }
 }
+

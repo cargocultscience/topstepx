@@ -1,6 +1,6 @@
 function hotkeysVersion()
 {
-    return "4.4.0";
+    return "4.5.0";
 }
 
 var debugHotkeys = false;
@@ -14,7 +14,7 @@ async function createAddWidget(addNews, addCalendar)
         cardDiv = document.querySelector('div[class^=ordercard_order]');
     }
 
-    if(cardDiv == null) 
+    if(cardDiv == null)
     {
         console.error("Cannot find card div");
         return;
@@ -49,7 +49,7 @@ async function createAddWidget(addNews, addCalendar)
                 options.widgetType= "NEWS";
                 new window.FJWidgets.createWidget(options);
             }
-            
+
             if(addCalendar)
             {
                 calendarDiv = document.createElement("div");
@@ -70,7 +70,7 @@ async function createAddWidget(addNews, addCalendar)
 
 async function findChart() {
     // chart component may not be available on the moment the page is loaded so try in a loop
-    for(var i = 0; i < 10; ++i) {    
+    for(var i = 0; i < 10; ++i) {
         console.log("Trying to find chart object");
         chartArray = Object.keys(document).filter(k => k.startsWith('tradingview'));
         if(chartArray.length > 0) {
@@ -89,9 +89,9 @@ async function setupHotkeys(accounts, addNews=true, addCalendar=true) {
     var hotkeysDict = {}
     console.log(hotkeys);
     hotkeys.forEach((m) => hotkeysDict[m["keys"].sort().join()] = m["f"])
-        
+
     document.addEventListener('keydown', (event) => handleKeyDown(event, 'document'));
-    
+
     var chart = await findChart();
     if(chart) {
         chart.addEventListener('keydown', (event) => handleKeyDown(event, 'chart'));
@@ -124,7 +124,7 @@ async function setupHotkeys(accounts, addNews=true, addCalendar=true) {
         }
         eventKeySet.add(event.code.toLowerCase());
         eventKey = Array.from(eventKeySet).sort().join();
-       
+
         if(eventKey in hotkeysDict)
         {
             event.preventDefault();
@@ -177,7 +177,7 @@ async function buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity)
 function buttonClickBuySellMarketQuantity(buySell, quantity)
 {
     var buttonTextToSearch = buySell ? 'buy' : 'sell';
-    console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');  
+    console.log(buttonTextToSearch + ' Quantity ' + quantity + ' hotkey pressed');
     buttonClickBuySellQuantityCommon(buttonTextToSearch, quantity);
 }
 
@@ -236,6 +236,18 @@ function buttonClickStopBreakEven()
 {
     console.log('Stop Break Even hotkey pressed');
     buttonClickCommon('b/e');
+}
+
+function buttonClickIncreaseQuantity()
+{
+    console.log("Increase quantity hotkey pressed");
+    buttonClickCommon('+');
+}
+
+function buttonClickDecreaseQuantity()
+{
+    console.log("Decrease quantity hotkey pressed");
+    buttonClickCommon('-');
 }
 
 function setQuantity(quantity)
